@@ -43,7 +43,22 @@ def create_tweet_format(info):
     if not info:
         return None
 
-    tweet = f"""Weather Update for {info["city"]}
+    lower_description = info["description"].lower()
+
+    if "clear" in lower_description:
+        emoji = "☀️"
+    elif "rain" in lower_description:
+        emoji = "🌧️"
+    elif "cloud" in lower_description:
+        emoji = "☁️"
+    elif "snow" in lower_description:
+        emoji = "❄️"
+    elif "storm" in lower_description:
+        emoji = "🌩️"
+    else:
+        emoji = "⛅️"
+
+    tweet = f"""{emoji} Weather Update for {info["city"]}
 
     Temperature: {info["temp"]:.1f} F
     Conditions: {info["description"].capitalize()}
@@ -79,4 +94,4 @@ def post_weather_update(city):
         return False
 
 if __name__ == "__main__":
-    post_weather_update("Chicago")
+    post_weather_update("Tokyo")
