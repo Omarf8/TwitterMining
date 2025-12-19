@@ -62,6 +62,7 @@ def create_tweet_format(info):
     tweet = f"""{emoji} Weather Update for {info["city"]}
 
     🌡️ Temperature: {info["temp"]:.1f} F
+    👌 Feels Like: {info["feels_like"]:.1f} F
     ⭐️ Conditions: {info["description"].capitalize()}
     💧 Humidity: {info["humidity"]}%
     💨 Wind: {info["wind_speed"]} mph
