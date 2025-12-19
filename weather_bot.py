@@ -27,7 +27,7 @@ def get_weather(city):
         weather_info = {
             "city" : data["name"],
             "temp" : data["main"]["temp"],
-            "feels_like" : data["main"]["feels_like"]
+            "feels_like" : data["main"]["feels_like"],
             "description" : data["weather"][0]["description"],
             "humidity" : data["main"]["humidity"],
             "wind_speed" : data["wind"]["speed"]
@@ -95,4 +95,4 @@ def post_weather_update(city):
         return False
 
 if __name__ == "__main__":
-    post_weather_update("Tokyo")
+    post_weather_update("Chicago")
