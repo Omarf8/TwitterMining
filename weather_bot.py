@@ -27,6 +27,7 @@ def get_weather(city):
         weather_info = {
             "city" : data["name"],
             "temp" : data["main"]["temp"],
+            "feels_like" : data["main"]["feels_like"]
             "description" : data["weather"][0]["description"],
             "humidity" : data["main"]["humidity"],
             "wind_speed" : data["wind"]["speed"]
@@ -60,10 +61,10 @@ def create_tweet_format(info):
 
     tweet = f"""{emoji} Weather Update for {info["city"]}
 
-    Temperature: {info["temp"]:.1f} F
-    Conditions: {info["description"].capitalize()}
-    Humidity: {info["humidity"]}%
-    Wind: {info["wind_speed"]} mph
+    🌡️ Temperature: {info["temp"]:.1f} F
+    ⭐️ Conditions: {info["description"].capitalize()}
+    💧 Humidity: {info["humidity"]}%
+    💨 Wind: {info["wind_speed"]} mph
     """
 
     return tweet
