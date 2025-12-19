@@ -7,12 +7,6 @@ from tweepy import OAuthHandler
 # Loads .env variables
 load_dotenv()
 
-# bearer_token = os.getenv("BEARER_TOKEN")
-# consumer_key = os.getenv("CONSUMER_KEY")
-# consumer_secret = os.getenv("CONSUMER_SECRET")
-# access_token = os.getenv("ACCESS_TOKEN")
-# access_secret = os.getenv("ACCESS_SECRET")
-
 client = tweepy.Client(
     consumer_key=os.getenv("CONSUMER_KEY"),
     consumer_secret=os.getenv("CONSUMER_SECRET"),
@@ -63,6 +57,26 @@ def post_weather_update(city):
     print(f"Getting Weather for {city}...")
 
     weather = get_weather(city)
+    if not weather:
+        print("Cannot create tweet without weather info")
+        return False
+
+    tweet_text = create_tweet_format(weather)
+    if not tweet_text:
+        print("Cannot create tweet without tweet format")
+        return False
+
+    print("Tweet to be posted:")
+    print(tweet_text)
+
+    try:
+        tweet = client.create_tweet(text=tweet_text)
+        print("Tweet Posted Successfully")
+        print(f"ID: {tweet.data["id"]}")
+        return True
+    except Exception as e:
+        print(f"Error: {e}")
+        return False
 
 if __name__ == "__main__":
     post_weather_update("Chicago")
