@@ -19,31 +19,31 @@ def get_weather(city):
     weather_key = os.getenv("OPENWEATHER_API_KEY")
     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={weather_key}&units=imperial"
 
-     try:
-         response = requests.get(url)
-         response.raise_for_status()
-         data = response.json()
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        data = response.json()
 
-         weather_info = {
+        weather_info = {
             "city" : data["name"],
             "temp" : data["main"]["temp"],
-            "description" : data["main"][0]["description"],
+            "description" : data["weather"][0]["description"],
             "humidity" : data["main"]["humidity"],
             "wind_speed" : data["wind"]["speed"]
-         }
+        }
 
-         print(f"Successfully fetched weather data for {city}")
-         return weather_info
+        print(f"Successfully fetched weather data for {city}")
+        return weather_info
 
-     except Exception as e:
-         print(f"Error: {e}")
-         return None
+    except Exception as e:
+        print(f"Error: {e}")
+        return None
 
 def create_tweet_format(info):
     if not info:
         return None
 
-    tweet = f"""Weather Update for {info["name"]}
+    tweet = f"""Weather Update for {info["city"]}
 
     Temperature: {info["temp"]:.1f} F
     Conditions: {info["description"].capitalize()}
