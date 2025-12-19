@@ -14,26 +14,26 @@ load_dotenv()
 # access_secret = os.getenv("ACCESS_SECRET")
 
 client = tweepy.Client(
-    consumer_key=os.getenv("CONSUMER_KEY"),
-    consumer_secret=os.getenv("CONSUMER_SECRET"),
-    access_token=os.getenv("ACCESS_TOKEN"),
-    access_token_secret=os.getenv("ACCESS_SECRET")
+   consumer_key=os.getenv("CONSUMER_KEY"),
+   consumer_secret=os.getenv("CONSUMER_SECRET"),
+   access_token=os.getenv("ACCESS_TOKEN"),
+   access_token_secret=os.getenv("ACCESS_SECRET")
 )
 
 def get_weather(city = "Chicago"):
-    weather_key = os.getenv("OPENWEATHER_API_KEY")
-    url = f"http://api.openweathermap.org/geo/1.0/direct?q={city}&appid={weather_key}&units=imperial"
+   weather_key = os.getenv("OPENWEATHER_API_KEY")
+   url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={weather_key}&units=imperial"
 
-    try:
-        response = requests.get(url)
-        response.raise_for_status()
-        data = response.json()
+   try:
+       response = requests.get(url)
+       response.raise_for_status()
+       data = response.json()
 
-        print(f"Name: {data["name"]}")
-        print(f"Temperature: {data["main"]["temp"]} F")
-        print(f"Description: {data["weather"][0]["description"]}")
-    except Exception as e:
-        print(f"Error: {e}")
+       print(f"Name: {data["name"]}")
+       print(f"Temperature: {data["main"]["temp"]} F")
+       print(f"Description: {data["weather"][0]["description"]}")
+   except Exception as e:
+       print(f"Error: {e}")
 
 get_weather()
 
