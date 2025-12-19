@@ -45,6 +45,20 @@ def get_weather(city):
          print(f"Error: {e}")
          return None
 
+def create_tweet_format(info):
+    if not info:
+        return None
+
+    tweet = f"""Weather Update for {info["name"]}
+
+    Temperature: {info["temp"]:.1f} F
+    Conditions: {info["description"].capitalize()}
+    Humidity: {info["humidity"]}%
+    Wind: {info["wind_speed"]} mph
+    """
+
+    return tweet
+
 def post_weather_update(city):
     print(f"Getting Weather for {city}...")
 
