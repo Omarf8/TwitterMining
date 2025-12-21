@@ -96,4 +96,4 @@ def post_weather_update(city):
         return False
 
 if __name__ == "__main__":
-    post_weather_update("Los Angeles")
+    post_weather_update("Salt Lake City")
